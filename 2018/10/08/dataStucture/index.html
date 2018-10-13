@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="学习," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="线性表顺序表地址连续的存储单元，可以随机访问。 1234567891011121314151617typedef struct &amp;#123;	ElemType *data;	int MaxSize, length;&amp;#125;SeqList;//这种写法是c中的，以前的代码中，声明struct新对象时，必须要带上struct，即形式为： //struct 结构名 对象名//c++中只需要stru">
+<meta name="keywords" content="学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构复习记录">
+<meta property="og:url" content="http://yoursite.com/2018/10/08/dataStucture/index.html">
+<meta property="og:site_name" content="My Heart">
+<meta property="og:description" content="线性表顺序表地址连续的存储单元，可以随机访问。 1234567891011121314151617typedef struct &amp;#123;	ElemType *data;	int MaxSize, length;&amp;#125;SeqList;//这种写法是c中的，以前的代码中，声明struct新对象时，必须要带上struct，即形式为： //struct 结构名 对象名//c++中只需要stru">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://omwiezyrk.bkt.clouddn.com/blog/20180717/210331953.png">
+<meta property="og:updated_time" content="2018-10-13T08:03:09.290Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构复习记录">
+<meta name="twitter:description" content="线性表顺序表地址连续的存储单元，可以随机访问。 1234567891011121314151617typedef struct &amp;#123;	ElemType *data;	int MaxSize, length;&amp;#125;SeqList;//这种写法是c中的，以前的代码中，声明struct新对象时，必须要带上struct，即形式为： //struct 结构名 对象名//c++中只需要stru">
+<meta name="twitter:image" content="http://omwiezyrk.bkt.clouddn.com/blog/20180717/210331953.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/08/dataStucture/"/>
+
+
+
+
+
+  <title>数据结构复习记录 | My Heart</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">My Heart</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Just For Dear Miss Zing.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/08/dataStucture/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Doordy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://omwiezyrk.bkt.clouddn.com/blog/20180413/133908722.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My Heart">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构复习记录</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-08T00:00:00+08:00">
+                2018-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/我们/" itemprop="url" rel="index">
+                    <span itemprop="name">我们</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h1 id="线性表"><a href="#线性表" class="headerlink" title="线性表"></a>线性表</h1><h2 id="顺序表"><a href="#顺序表" class="headerlink" title="顺序表"></a>顺序表</h2><p>地址连续的存储单元，可以随机访问。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	ElemType *data;</span><br><span class="line">	<span class="keyword">int</span> MaxSize, length;</span><br><span class="line">&#125;SeqList;</span><br><span class="line"><span class="comment">//这种写法是c中的，以前的代码中，声明struct新对象时，必须要带上struct，即形式为： </span></span><br><span class="line"><span class="comment">//struct 结构名 对象名</span></span><br><span class="line"><span class="comment">//c++中只需要struct 结构名&#123;结构体&#125;，声明新对象时：结构名 对象名</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	SeqList L;</span><br><span class="line">	<span class="keyword">int</span> InitSize;</span><br><span class="line">	<span class="comment">//C语言的动态分配语句</span></span><br><span class="line">	L.data = (ElemType*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(ElemType)*InitSize);</span><br><span class="line">	<span class="comment">//c++的动态分配语句</span></span><br><span class="line">	L.data = <span class="keyword">new</span> ElemType[InitSize];</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><p>单链表节点描述：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">LNode</span>&#123;</span></span><br><span class="line">    ElemType data;</span><br><span class="line">    LNode *next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="栈和队列"><a href="#栈和队列" class="headerlink" title="栈和队列"></a>栈和队列</h1><p>栈和队列都是受限线性表，可以使用顺序存储和链式存储。</p>
+<h1 id="树"><a href="#树" class="headerlink" title="树"></a>树</h1><h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><h3 id="1-满二叉树：树的每一层含有最多的节点"><a href="#1-满二叉树：树的每一层含有最多的节点" class="headerlink" title="1. 满二叉树：树的每一层含有最多的节点"></a>1. 满二叉树：树的每一层含有最多的节点</h3><p>高度为<code>h</code>，节点数为<code>2^h-1 = 2^0 + 2^1 + ...+ 2^(h-1)</code>，利用等差数列求和公式计算：</p>
+<p><img src="http://omwiezyrk.bkt.clouddn.com/blog/20180717/210331953.png" alt="mark"></p>
+<h3 id="2-完全二叉树："><a href="#2-完全二叉树：" class="headerlink" title="2. 完全二叉树："></a>2. 完全二叉树：</h3><ul>
+<li>如果有度为1的节点，只可能有1个。<h3 id="3-二叉排序树："><a href="#3-二叉排序树：" class="headerlink" title="3. 二叉排序树："></a>3. 二叉排序树：</h3>左子树上所有节点的关键字均小于根节点的关键字；右子树上的所有节点的关键字均大于根节点上的关键字。左右子树又分别是一棵二叉排序树。<h3 id="4-平衡二叉树："><a href="#4-平衡二叉树：" class="headerlink" title="4. 平衡二叉树："></a>4. 平衡二叉树：</h3>树上任一节点的左子树和右子树的深度之差不超过1。</li>
+</ul>
+<p><strong>二叉树的性质：</strong></p>
+<ul>
+<li>二叉树可以为空</li>
+<li><p>叶子节点数等于度为2的节点数加1。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">证明：</span><br><span class="line">    N为节点数，B为分支总数。</span><br><span class="line">    N = N1 + N2 + N0</span><br><span class="line">    N = B + 1（除了根节点，其余节点都有一个分支进入）</span><br><span class="line">    B = N1 + 2 * N2</span><br><span class="line">    公式联合：N0 = N2 + 1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第K层最多有2^(k-1)个节点</p>
+</li>
+<li>具有N个节点的<strong>完全二叉树</strong>的高度为<code>ceil(log(N+1))</code> or <code>floor(logN) + 1</code>。</li>
+</ul>
+<p>二叉树的链式存储结果描述：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span>&#123;</span></span><br><span class="line">    ElemType data;</span><br><span class="line">    <span class="comment">//这里最好初始化一下，层次遍历的时候出现了初始化不为NULL的问题</span></span><br><span class="line">    BiTNode *lchild = <span class="literal">NULL</span>, *rchild = <span class="literal">NULL</span>;</span><br><span class="line">&#125;BiTNode,*BiTree;</span><br></pre></td></tr></table></figure></p>
+<h2 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h2><p>递归实现，以先序遍历为例：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(BiTree T)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">        visit(T);</span><br><span class="line">        preOrder(T-&gt;lchild);</span><br><span class="line">        preOrder(T-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>时间复杂度为O(n)，空间复杂度最坏为O(n)，即为单支树。</strong></p>
+<p>非递归实现，以中序遍历为例：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//需要借助一个栈</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InOrder</span><span class="params">(BiTree T)</span></span>&#123;</span><br><span class="line">    <span class="built_in">stack</span>&lt;BiTree&gt; s;</span><br><span class="line">    BiTree p = T;</span><br><span class="line">    <span class="keyword">while</span>(p || !s.empty())&#123;</span><br><span class="line">        <span class="keyword">if</span>(p)&#123;</span><br><span class="line">            s.push(p);</span><br><span class="line">            p = p-&gt;lchild;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            p = s.top();</span><br><span class="line">            s.pop();</span><br><span class="line">            visit(p);</span><br><span class="line">            p = p-&gt;rchild;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>层次遍历，需要借助一个队列:</p>
+<p>这里使用deque实现，vector在尾部之外的位置插入或者删除元素会比较慢。详见<a href="https://www.cnblogs.com/zhuyf87/archive/2012/12/09/2809896.html" target="_blank" rel="noopener">deque与vector的主要区别</a>。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">levelOrder</span><span class="params">(BiTree T)</span></span>&#123;</span><br><span class="line">	<span class="built_in">deque</span>&lt;BiTree&gt; <span class="built_in">queue</span>;</span><br><span class="line">	<span class="built_in">queue</span>.push_back(T);</span><br><span class="line">	BiTree p;</span><br><span class="line">	<span class="keyword">while</span> (!<span class="built_in">queue</span>.empty())&#123;</span><br><span class="line">		p = <span class="built_in">queue</span>.front(); </span><br><span class="line">		<span class="built_in">queue</span>.pop_front();</span><br><span class="line">		<span class="keyword">if</span> (p-&gt;lchild)<span class="built_in">queue</span>.push_back(p-&gt;lchild);</span><br><span class="line">		<span class="keyword">if</span> (p-&gt;rchild)<span class="built_in">queue</span>.push_back(p-&gt;rchild);</span><br><span class="line">		visit(p);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>由二叉树的先序序列和中序序列可以唯一的确定一棵二叉树</strong></p>
+<p>具体实现见：<a href="https://www.jianshu.com/p/62060a257d2d" target="_blank" rel="noopener">重建二叉树</a></p>
+<h2 id="线索二叉树"><a href="#线索二叉树" class="headerlink" title="线索二叉树"></a>线索二叉树</h2><p>含有两个标志域，指示指针域是孩子节点还是前驱（后继）。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ThreadNode</span>&#123;</span></span><br><span class="line">    ElemType data;</span><br><span class="line">    BiTNode *lchild = <span class="literal">NULL</span>, *rchild = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">int</span> ltag,rtag;</span><br><span class="line">&#125;ThreadNode,*ThreadTree;</span><br></pre></td></tr></table></figure></p>
+<h2 id="树的遍历"><a href="#树的遍历" class="headerlink" title="树的遍历"></a>树的遍历</h2><ul>
+<li>树的先根遍历的顺序与这颗树响应的二叉树的先序遍历顺序相同。</li>
+<li>树的后根遍历的顺序与这颗树响应的二叉树的中序遍历顺序相同。</li>
+</ul>
+<h2 id="二叉排序树"><a href="#二叉排序树" class="headerlink" title="二叉排序树"></a>二叉排序树</h2><p>构造和插入：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//二叉排序树的插入，也可以用来构造</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">BST_Insert</span><span class="params">(BiTree &amp;T, ElemType k)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (T == <span class="literal">NULL</span>)&#123;</span><br><span class="line">		T = (BiTree)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiTNode));</span><br><span class="line">		T-&gt;data = k;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;<span class="comment">//返回1，代表成功</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (k &gt; T-&gt;data)&#123;</span><br><span class="line">		<span class="keyword">return</span> BST_Insert(T-&gt;lchild, k);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> BST_Insert(T-&gt;rchild, k);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>如果对二叉排序树进行中序遍历，会得到递增的有序序列。因此删除有左、右子树的节点z时，使用z的直接后继（或者前驱）代替z，然后从二叉树中删除这个直接后继（或前驱）。</li>
+<li>高度为H的二叉排序树，插入和删除的时间复杂度是<code>O(H)</code>。最坏的情况为单支树，为<code>O(N)</code>。如果是平衡二叉树，平均查找长度为<code>O(logN)</code>。</li>
+</ul>
+<h2 id="平衡二叉树（AVL树）"><a href="#平衡二叉树（AVL树）" class="headerlink" title="平衡二叉树（AVL树）"></a>平衡二叉树（AVL树）</h2><p>特殊的二叉排序树，要保证任一节点的左右子树高度差的绝对值不能超过1。</p>
+<p>#图</p>
+<ul>
+<li>邻接矩阵：容易确定任意两个节点是否有边相连。但是要确定边的数量，需要遍历整个矩阵。稠密图适合使用邻接矩阵。</li>
+<li>邻接表：存在两种节点：顶点表节点和边表节点。顶点表使用顺序存储，节点结构为<code>|data|firstarc|</code>；边表使用链表存储，节点结构为<code>|adjvex|nextarc|</code>。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxVertexNum 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> VertexType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> EdgeType;</span><br><span class="line"></span><br><span class="line"><span class="comment">//图的邻接矩阵存储</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MGraph</span>&#123;</span></span><br><span class="line">	VertexType vertex[MaxVertexNum];</span><br><span class="line">	EdgeType edge[MaxVertexNum][MaxVertexNum];</span><br><span class="line">	<span class="keyword">int</span> vexnum, arcnum; <span class="comment">//图的当前顶点数和弧数</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//图的邻接表存储</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span>&#123;</span></span><br><span class="line">	VertexType adjvex;</span><br><span class="line">	ArcNode *nextarc = <span class="literal">NULL</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">VertexNode</span>&#123;</span></span><br><span class="line">	VertexType data;</span><br><span class="line">	ArcNode *firstarc = <span class="literal">NULL</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ALGraph</span>&#123;</span></span><br><span class="line">	VertexNode graph[MaxVertexNum];</span><br><span class="line">	<span class="keyword">int</span> vexnum, arcnum;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h2><h3 id="广度优先遍历"><a href="#广度优先遍历" class="headerlink" title="广度优先遍历"></a>广度优先遍历</h3><p>类似于二叉树树的层序遍历，不过由于图可能存在环路的原因，所以需要一个访问标记数组。</p>
+<ul>
+<li>使用邻接表表示的时候，时间复杂度为<code>O(V+E),V为节点的个数，E为弧的个数</code>，每个节点都需要入队一次，每条边至少访问一次，<em>结合下面代码的两个while理解</em>；</li>
+<li>使用邻接矩阵表示的时候，时间复杂度为<code>O(V^2)</code>，因为查找每个节点的邻接点都需要<code>O(V)</code>。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//邻接表形式的广度优先遍历</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; visited(MaxVertexNum, <span class="literal">false</span>);</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(LGraph G, VertexType v)</span></span>&#123;</span><br><span class="line">	<span class="built_in">deque</span>&lt;VertexType&gt; <span class="built_in">queue</span>;</span><br><span class="line"></span><br><span class="line">	visit(v);</span><br><span class="line">	visited[v] = <span class="literal">true</span>;</span><br><span class="line">	<span class="built_in">queue</span>.push_back(v);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (!<span class="built_in">queue</span>.empty())&#123;</span><br><span class="line">		<span class="comment">//取队首元素</span></span><br><span class="line">		VertexType t = <span class="built_in">queue</span>.front();</span><br><span class="line">		<span class="built_in">queue</span>.pop_front();</span><br><span class="line"></span><br><span class="line">		ArcPoint p = G.graph[t];</span><br><span class="line">		<span class="keyword">while</span> (p != <span class="literal">NULL</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span> (!visited[p-&gt;adjvex])&#123;</span><br><span class="line">				visit(p-&gt;adjvex);</span><br><span class="line">				visited[p-&gt;adjvex] = <span class="literal">true</span>;</span><br><span class="line">				<span class="built_in">queue</span>.push_back(p-&gt;adjvex);</span><br><span class="line">			&#125;</span><br><span class="line">			p = p-&gt;nextarc;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用广度优先求解单源最短路径，因为广度优先都是按照距离出发点由近到远来遍历图中的每个顶点的，只需要增加一个距离数组，初始化为正无穷，之后根据访问顺序进行+1操作即可。</p>
+<h3 id="深度优先遍历"><a href="#深度优先遍历" class="headerlink" title="深度优先遍历"></a>深度优先遍历</h3><p>类似于树的先序遍历，可以使用递归实现。时间复杂度和空间复杂度与广度优先遍历相同。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//深度优先遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(LGraph G, VertexType v)</span></span>&#123;</span><br><span class="line">	visit(v);</span><br><span class="line">	visited[v] = <span class="literal">true</span>;</span><br><span class="line">	ArcPoint p = G.graph[v];</span><br><span class="line">	<span class="keyword">while</span> (p)&#123;</span><br><span class="line">		<span class="keyword">if</span> (!visited[p-&gt;adjvex])</span><br><span class="line">			DFS(G, p-&gt;adjvex);</span><br><span class="line">		p = p-&gt;nextarc;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="图的应用"><a href="#图的应用" class="headerlink" title="图的应用"></a>图的应用</h2><h3 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h3><ul>
+<li>Prim算法：选与几何中距离最近的点。适用于边稠密的图。</li>
+<li>Kruskal算法：按全职的递增次序选择边。适用于边稀疏而顶点多的图。</li>
+</ul>
+<h3 id="最短路径"><a href="#最短路径" class="headerlink" title="最短路径"></a>最短路径</h3><blockquote>
+<p><code>TODO</code></p>
+</blockquote>
+<h1 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h1><h3 id="顺序查找"><a href="#顺序查找" class="headerlink" title="顺序查找"></a>顺序查找</h3><ol>
+<li>一般线性表的顺序查找：查找成功的平均查找长度<code>ASL=(n+1)/2</code></li>
+<li>有序表的线性查找:可以中途知道查找是否成功</li>
+</ol>
+<h3 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h3><p><strong>时间复杂度：O(logn)</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; lst, <span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line"><span class="comment">//有序表中进行二分查找，不存在返回-1</span></span><br><span class="line">	<span class="keyword">int</span> low = <span class="number">0</span>, high = lst.size() - <span class="number">1</span>, mid;</span><br><span class="line">	<span class="keyword">while</span> (low &lt;= high)&#123;</span><br><span class="line">		mid = (low + high) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span> (lst[mid] == key)<span class="keyword">return</span> mid;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (lst[mid] &lt; key)low = mid + <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> high = mid - <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分块查找：索引顺序查找"><a href="#分块查找：索引顺序查找" class="headerlink" title="分块查找：索引顺序查找"></a>分块查找：索引顺序查找</h3><p>将查找表分为若干个子块。块内的元素可以无序，但块之间是有序的。即前一个块中的最大关键字小于下一个块中的最小关键字，建立一个索引表，每个元素含有各块的最大关键字和各块的第一个关键字的地址，索引表为有序的。</p>
+<p>分块查找：在索引表中顺序或者折半查找，块内顺序查找。</p>
+<h3 id="B树"><a href="#B树" class="headerlink" title="B树"></a>B树</h3><blockquote>
+<p><code>TODO</code></p>
+</blockquote>
+<h3 id="散列表（HASH）"><a href="#散列表（HASH）" class="headerlink" title="散列表（HASH）"></a>散列表（HASH）</h3><ol>
+<li>散列函数：<code>Hash(key) = Addr</code></li>
+<li>散列函数构造方法<ul>
+<li>直接定址法:<code>H(key) = a*key+b</code></li>
+<li>除留余数法:<code>H(key) = key%p</code></li>
+<li>数字分析法</li>
+<li>平方取中法</li>
+<li>折叠法</li>
+</ul>
+</li>
+<li>处理冲突的方法<ul>
+<li>开放定址法:<code>Hi = (H(key)+di)%m(m为表长)</code><ul>
+<li>线性探测法:<code>di=1,2,...,m-1</code></li>
+<li>平方探测法:<code>di=1^2,-1^2,2^2,...</code></li>
+<li>再散列法:冲突时使用第二个散列函数<strong>计算地址增量</strong></li>
+<li>伪随机序列法</li>
+</ul>
+</li>
+<li>拉链法：同义词形成一个链表</li>
+</ul>
+</li>
+</ol>
+<h3 id="字符串模式匹配"><a href="#字符串模式匹配" class="headerlink" title="字符串模式匹配"></a>字符串模式匹配</h3><blockquote>
+<p><code>TODO</code></p>
+</blockquote>
+<h1 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h1><h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><h3 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h3><ul>
+<li>状态：有序序列<code>L[1...i-1]</code>，<code>L(i)</code>，无需序列<code>L[i+1...n]</code></li>
+<li>步骤：查找位置&gt;&gt;后移&gt;&gt;插入<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//插入排序:具体操作时边查找边插入</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; lst)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; lst.size(); i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> temp = lst[i], j = i - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span> (j &gt;= <span class="number">0</span> &amp;&amp; temp &lt; lst[j])&#123;</span><br><span class="line">			lst[j+<span class="number">1</span>] = lst[j];</span><br><span class="line">			j--;</span><br><span class="line">		&#125;</span><br><span class="line">		lst[j + <span class="number">1</span>] = temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>性能:</strong></p>
+<ul>
+<li>空间复杂度：<code>O(1)</code></li>
+<li>时间复杂度：<ul>
+<li>最好：sorted,<code>O(n)</code>。</li>
+<li>最坏：顺序相反</li>
+<li>平均：<code>n^2/4</code>,<code>O(n^2)</code>。</li>
+</ul>
+</li>
+<li>稳定性：稳定</li>
+<li>顺序存储或者链式存储的线性表<h3 id="折半插入排序"><a href="#折半插入排序" class="headerlink" title="折半插入排序"></a>折半插入排序</h3>先查找，后插入。实际上元素的移动次数没有变，所以时间复杂度还是<code>O(n)</code>。<h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3>适用于基本有序和数据量不大的排序表。</li>
+</ul>
+<ol>
+<li>先将待排序表分割成若干个形如<code>L[i,i+d,i+2d,....,i+kd]</code>的组，分别进行直接插入排序</li>
+<li>减小<code>d</code>，直到<code>d=1</code>，进行一次直接插入排序。</li>
+</ol>
+<p><strong>性能:</strong></p>
+<ul>
+<li>时间复杂度：难以计算</li>
+<li>空间复杂度：<code>O(1)</code></li>
+<li>不稳定</li>
+<li><p>顺序存储的线性表</p>
+<h2 id="交换排序"><a href="#交换排序" class="headerlink" title="交换排序"></a>交换排序</h2><h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//冒泡排序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BubbleSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; lst)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = lst.size() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">		<span class="keyword">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)&#123;</span><br><span class="line">			<span class="keyword">if</span> (lst[j] &gt; lst[j + <span class="number">1</span>])&#123;</span><br><span class="line">				swap(lst[j], lst[j + <span class="number">1</span>]);</span><br><span class="line">				flag = <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (!flag)<span class="keyword">break</span>; <span class="comment">//若是未发生交换，说明已经有序</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>性能:</strong></p>
+<ul>
+<li>空间复杂度：<code>O(1)</code></li>
+<li>时间复杂度：<ul>
+<li>最好：sorted,<code>O(n)</code>。</li>
+<li>最坏：顺序相反</li>
+<li>平均：<code>O(n^2)</code>。</li>
+</ul>
+</li>
+<li><p>稳定性：稳定</p>
+<h3 id="快速排序-分治"><a href="#快速排序-分治" class="headerlink" title="快速排序:分治"></a>快速排序:分治</h3></li>
+</ul>
+<ol>
+<li>选一个元素作为基准</li>
+<li>通过一趟排序将带排序表分为两部分，左边小于基准，右边大于基准，基准元素位置确定</li>
+<li><p>递归的对子表进行以上两步</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//快速排序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QuickSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; lst, <span class="keyword">int</span> left ,<span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (left &gt;= right)<span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">int</span> low = left, high = right;	</span><br><span class="line">	<span class="comment">//Partition()划分函数</span></span><br><span class="line">	<span class="keyword">int</span> pivot=lst[low];<span class="comment">//枢轴值取当前表中第一个元素</span></span><br><span class="line">	<span class="keyword">while</span> (low &lt; high)&#123;</span><br><span class="line">		<span class="keyword">while</span> (high&gt;low &amp;&amp; pivot &lt;= lst[high])high--;<span class="comment">//必须有=</span></span><br><span class="line">		lst[low] = lst[high];</span><br><span class="line">		<span class="keyword">while</span> (low&lt;high &amp;&amp; pivot &gt;= lst[low])low++;</span><br><span class="line">		lst[high] = lst[low];</span><br><span class="line">	&#125;</span><br><span class="line">	lst[low] = pivot;</span><br><span class="line">	QuickSort(lst,left,low<span class="number">-1</span>);</span><br><span class="line">	QuickSort(lst,high+<span class="number">1</span>,right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>性能:</strong></p>
+<ul>
+<li>空间复杂度：<ul>
+<li>最坏情况（基本有序或者基本逆序的时候，最大情况不对称)：<code>O(n)</code></li>
+<li>平均情况：<code>O(log n)</code></li>
+</ul>
+</li>
+<li>时间复杂度：<ul>
+<li>最坏：<code>O(n^2)</code></li>
+<li>平均和最好情况相当：<code>O(nlog n)</code>。</li>
+</ul>
+</li>
+<li>稳定性：不稳定</li>
+</ul>
+<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><h3 id="简单选择排序"><a href="#简单选择排序" class="headerlink" title="简单选择排序"></a>简单选择排序</h3><p>对于排序表<code>L[1...n]</code>，第<code>i</code>趟排序即从<code>L[i...n]</code>中选择关键字最小的元素与<code>L(i)</code>，每一趟可以确定一个元素的最终位置，这样经过<code>n-1</code>趟排序就可以使得整个排序表有序。</p>
+<p><strong>性能:</strong></p>
+<ul>
+<li>时间复杂度：<code>O(n^2)</code></li>
+<li>空间复杂度：<code>O(1)</code></li>
+<li>不稳定<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3></li>
+</ul>
+<blockquote>
+<p><code>TODO:Code，USE STL</code></p>
+</blockquote>
+<p><strong>性能:</strong></p>
+<ul>
+<li>空间复杂度：<code>O(1)</code></li>
+<li>时间复杂度：建堆时间<code>O(n)</code>，时间复杂度为<code>O(nlog n)</code>。</li>
+<li>稳定性：不稳定</li>
+</ul>
+<h2 id="2-路归并排序"><a href="#2-路归并排序" class="headerlink" title="2-路归并排序"></a>2-路归并排序</h2><p><strong>思想：</strong> 将多个有序表组合成一个新的有序表。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//归并排序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; lst, <span class="keyword">int</span> left, <span class="keyword">int</span> mid, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; B;<span class="comment">//辅助数组</span></span><br><span class="line">	<span class="keyword">int</span> i = left, j = mid+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span> (i &lt;= mid &amp;&amp; j &lt;= right)&#123;</span><br><span class="line">		<span class="keyword">if</span> (lst[i] &lt;= lst[j])&#123; B.push_back(lst[i]); i++; &#125;</span><br><span class="line">		<span class="keyword">else</span>&#123; B.push_back(lst[j]); j++; &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//将未检测完的表复制在尾部，下面两句只会运行一句</span></span><br><span class="line">	<span class="keyword">while</span> (i &lt;= mid)&#123; B.push_back(lst[i]); i++;	&#125;</span><br><span class="line">	<span class="keyword">while</span> (j &lt;= right)&#123;	B.push_back(lst[j]); j++; &#125;</span><br><span class="line">	<span class="comment">//复制回lst中</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; B.size(); k++)lst[left + k] = B[k];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; lst, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (left &lt; right)&#123;</span><br><span class="line">		<span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;<span class="comment">//求待排序部分的中心</span></span><br><span class="line">		MergeSort(lst, left, mid); <span class="comment">//对左半部分递归</span></span><br><span class="line">		MergeSort(lst, mid + <span class="number">1</span>, right); <span class="comment">//对右半部分递归</span></span><br><span class="line">		Merge(lst,left,mid,right);<span class="comment">//归并</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="基数排序（可以看一下与桶排序的差别）"><a href="#基数排序（可以看一下与桶排序的差别）" class="headerlink" title="基数排序（可以看一下与桶排序的差别）"></a>基数排序（可以看一下与桶排序的差别）</h2><ul>
+<li>分配：根据关键字将元素置于不同的队列中</li>
+<li>收集：将各个队列首尾相接，得到新的线性表<h2 id="排序算法性能"><a href="#排序算法性能" class="headerlink" title="排序算法性能"></a>排序算法性能</h2>算法|最好|平均|最坏|空间复杂度|稳定性<br>-|-|-|-|-|-<br>直接插入排序|<code>O(n)</code>|<code>O(n^2)</code>|<code>O(n^2)</code>|<code>O(1)</code>|是<br>简单选择排序|<code>O(n^2)</code>|<code>O(n^2)</code>|<code>O(n^2)</code>|<code>O(1)</code>|否<br>希尔排序| ——|—— |—— |<code>O(1)</code>|否<br>冒泡排序|<code>O(n)</code>|<code>O(n^2)</code>|<code>O(n^2)</code>|<code>O(1)</code>|是<br>快速排序|<code>O(nlogn)</code>|<code>O(nlogn)</code>|<code>O(n^2)</code>|<code>O(logn)</code>|否<br>堆排序|<code>O(nlogn)</code>|<code>O(nlogn)</code>|<code>O(nlogn)</code>|<code>O(1)</code>|否<br>归并排序|<code>O(nlogn)</code>|<code>O(nlogn)</code>|<code>O(nlogn)</code>|<code>O(n)</code>|是<br>基数排序|——|—— |——|——|是</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>宝宝，欢迎投币~嘿嘿</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://omwiezyrk.bkt.clouddn.com/blog/20180413/135251145.png" alt="Mr.Doordy WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习/" rel="tag"># 学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/08/job/" rel="next" title="一切为了offer">
+                <i class="fa fa-chevron-left"></i> 一切为了offer
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://omwiezyrk.bkt.clouddn.com/blog/20180413/133908722.jpg"
+               alt="Mr.Doordy" />
+          <p class="site-author-name" itemprop="name">Mr.Doordy</p>
+           
+              <p class="site-description motion-element" itemprop="description">愿待你如初，爱你入骨</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Miss-Zing" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/u/2493428177" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线性表"><span class="nav-number">1.</span> <span class="nav-text">线性表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#顺序表"><span class="nav-number">1.1.</span> <span class="nav-text">顺序表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链表"><span class="nav-number">1.2.</span> <span class="nav-text">链表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#栈和队列"><span class="nav-number">2.</span> <span class="nav-text">栈和队列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#树"><span class="nav-number">3.</span> <span class="nav-text">树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树"><span class="nav-number">3.1.</span> <span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-满二叉树：树的每一层含有最多的节点"><span class="nav-number">3.1.1.</span> <span class="nav-text">1. 满二叉树：树的每一层含有最多的节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-完全二叉树："><span class="nav-number">3.1.2.</span> <span class="nav-text">2. 完全二叉树：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-二叉排序树："><span class="nav-number">3.1.3.</span> <span class="nav-text">3. 二叉排序树：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-平衡二叉树："><span class="nav-number">3.1.4.</span> <span class="nav-text">4. 平衡二叉树：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树的遍历"><span class="nav-number">3.2.</span> <span class="nav-text">二叉树的遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线索二叉树"><span class="nav-number">3.3.</span> <span class="nav-text">线索二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树的遍历"><span class="nav-number">3.4.</span> <span class="nav-text">树的遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉排序树"><span class="nav-number">3.5.</span> <span class="nav-text">二叉排序树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#平衡二叉树（AVL树）"><span class="nav-number">3.6.</span> <span class="nav-text">平衡二叉树（AVL树）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图的遍历"><span class="nav-number">3.7.</span> <span class="nav-text">图的遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#广度优先遍历"><span class="nav-number">3.7.1.</span> <span class="nav-text">广度优先遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深度优先遍历"><span class="nav-number">3.7.2.</span> <span class="nav-text">深度优先遍历</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图的应用"><span class="nav-number">3.8.</span> <span class="nav-text">图的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最小生成树"><span class="nav-number">3.8.1.</span> <span class="nav-text">最小生成树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最短路径"><span class="nav-number">3.8.2.</span> <span class="nav-text">最短路径</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查找"><span class="nav-number">4.</span> <span class="nav-text">查找</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序查找"><span class="nav-number">4.0.1.</span> <span class="nav-text">顺序查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二分查找"><span class="nav-number">4.0.2.</span> <span class="nav-text">二分查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分块查找：索引顺序查找"><span class="nav-number">4.0.3.</span> <span class="nav-text">分块查找：索引顺序查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B树"><span class="nav-number">4.0.4.</span> <span class="nav-text">B树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#散列表（HASH）"><span class="nav-number">4.0.5.</span> <span class="nav-text">散列表（HASH）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串模式匹配"><span class="nav-number">4.0.6.</span> <span class="nav-text">字符串模式匹配</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#排序"><span class="nav-number">5.</span> <span class="nav-text">排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#插入排序"><span class="nav-number">5.1.</span> <span class="nav-text">插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#直接插入排序"><span class="nav-number">5.1.1.</span> <span class="nav-text">直接插入排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#折半插入排序"><span class="nav-number">5.1.2.</span> <span class="nav-text">折半插入排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#希尔排序"><span class="nav-number">5.1.3.</span> <span class="nav-text">希尔排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交换排序"><span class="nav-number">5.2.</span> <span class="nav-text">交换排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#冒泡排序"><span class="nav-number">5.2.1.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速排序-分治"><span class="nav-number">5.2.2.</span> <span class="nav-text">快速排序:分治</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择排序"><span class="nav-number">5.3.</span> <span class="nav-text">选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单选择排序"><span class="nav-number">5.3.1.</span> <span class="nav-text">简单选择排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆排序"><span class="nav-number">5.3.2.</span> <span class="nav-text">堆排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-路归并排序"><span class="nav-number">5.4.</span> <span class="nav-text">2-路归并排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基数排序（可以看一下与桶排序的差别）"><span class="nav-number">5.5.</span> <span class="nav-text">基数排序（可以看一下与桶排序的差别）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序算法性能"><span class="nav-number">5.6.</span> <span class="nav-text">排序算法性能</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Doordy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
